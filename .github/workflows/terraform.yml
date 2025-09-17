@@ -1,0 +1,22 @@
+name: Run Terraform
+
+on:
+  [push]
+
+jobs:
+  dev:
+    name: Deploy to dev
+    permissions:
+      id-token: write
+      contents: read
+    uses: kartverket/github-workflows/.github/workflows/run-terraform.yml@v2.2
+    with:
+      runner: atkv1-dev
+      environment: dev
+      kubernetes_cluster: atkv1-dev
+      terraform_workspace: dev
+      terraform_options: -var-file=dev.tfvars
+      working_directory: terraform
+      workload_identity_provider: X
+      service_account: X
+      project_id: X
